@@ -1,0 +1,4 @@
+# files that will be deployed from repo to webserver using Github Actions
+# Not very flexible but I don't want READMEs and git junk on the webhost so it will do
+index.css
+index.html

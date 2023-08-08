@@ -1,0 +1,16 @@
+name: Deploy to RPi
+on:
+    push:
+        branches: 
+            - "master"
+jobs:
+    deployer:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install SSH Key
+              uses: shimataro/ssh-key-action@v2.5.1
+              with:
+                key: ${{ secrets.SSH_KEY }}
+                known_hosts: ${{ secrets.KNOWN_HOSTS }}
+            - name: rsync assets over SSH
+              run: rsync --files-from=filelist -avz ./ ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.PATH }}
